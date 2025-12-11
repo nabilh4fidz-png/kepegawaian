@@ -18,9 +18,8 @@ ob_start();
                     </div>
                     
                     <div class="mb-3">
-                        <label for="Tgl_Berdiri" class="form-label">Tanggal Berdiri</label>
-                        <input type="date" class="form-control" id="Tgl_Berdiri" name="Tgl_Berdiri" 
-                               value="<?= $department['Tgl_Berdiri'] ? date('Y-m-d', strtotime($department['Tgl_Berdiri'])) : '' ?>">
+                        <label for="Keterangan" class="form-label">Keterangan</label>
+                        <textarea class="form-control" id="Keterangan" name="Keterangan" rows="3"><?= htmlspecialchars($department['Keterangan'] ?? '') ?></textarea>
                     </div>
                     
                     <div class="d-flex justify-content-between">

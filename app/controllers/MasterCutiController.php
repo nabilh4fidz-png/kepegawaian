@@ -25,10 +25,9 @@ class MasterCutiController extends Controller {
             $data = [
                 'Nama_Cuti' => $this->input('Nama_Cuti'),
                 'Tipe_Cuti' => $this->input('Tipe_Cuti'),
-                'Jatah_Hari' => $this->input('Jatah_Hari', 0),
-                'Berlaku_Untuk' => $this->input('Berlaku_Untuk'),
-                'Tgl_Libur' => $this->input('Tgl_Libur') ?: null,
-                'Deskripsi' => $this->input('Deskripsi')
+                'Jumlah_Hari' => $this->input('Jumlah_Hari', 0),
+                'Keterangan' => $this->input('Keterangan'),
+                'Status' => $this->input('Status', 'Aktif')
             ];
             
             $masterCutiModel = new MasterCuti();
@@ -54,10 +53,9 @@ class MasterCutiController extends Controller {
             $data = [
                 'Nama_Cuti' => $this->input('Nama_Cuti'),
                 'Tipe_Cuti' => $this->input('Tipe_Cuti'),
-                'Jatah_Hari' => $this->input('Jatah_Hari', 0),
-                'Berlaku_Untuk' => $this->input('Berlaku_Untuk'),
-                'Tgl_Libur' => $this->input('Tgl_Libur') ?: null,
-                'Deskripsi' => $this->input('Deskripsi')
+                'Jumlah_Hari' => $this->input('Jumlah_Hari', 0),
+                'Keterangan' => $this->input('Keterangan'),
+                'Status' => $this->input('Status', 'Aktif')
             ];
             
             $masterCutiModel->update($id, $data);

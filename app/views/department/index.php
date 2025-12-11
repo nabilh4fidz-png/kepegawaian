@@ -17,7 +17,6 @@ ob_start();
                         <th>ID</th>
                         <th>Jabatan</th>
                         <th>Jumlah Karyawan</th>
-                        <th>Tanggal Berdiri</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -32,7 +31,6 @@ ob_start();
                                 <td><?= htmlspecialchars($dept['ID_Departemen']) ?></td>
                                 <td><?= htmlspecialchars($dept['Jabatan']) ?></td>
                                 <td><?= htmlspecialchars($dept['Jumlah_Karyawan']) ?></td>
-                                <td><?= $dept['Tgl_Berdiri'] ? date('d/m/Y', strtotime($dept['Tgl_Berdiri'])) : '-' ?></td>
                                 <td>
                                     <a href="/Kepegawaian/department/edit/<?= $dept['ID_Departemen'] ?>" class="btn btn-sm btn-warning">Edit</a>
                                     <a href="/Kepegawaian/department/delete/<?= $dept['ID_Departemen'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>

@@ -27,10 +27,10 @@ ob_start();
                     <div class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label for="Periode_Bulan" class="form-label">Bulan <span class="text-danger">*</span></label>
-                                <select class="form-control" id="Periode_Bulan" name="Periode_Bulan" required>
+                                <label for="Bulan" class="form-label">Bulan <span class="text-danger">*</span></label>
+                                <select class="form-control" id="Bulan" name="Bulan" required>
                                     <?php for ($i = 1; $i <= 12; $i++): ?>
-                                        <option value="<?= $i ?>" <?= $slipGaji['Periode_Bulan'] == $i ? 'selected' : '' ?>>
+                                        <option value="<?= $i ?>" <?= $slipGaji['Bulan'] == $i ? 'selected' : '' ?>>
                                             <?= date('F', mktime(0, 0, 0, $i, 1)) ?>
                                         </option>
                                     <?php endfor; ?>
@@ -39,16 +39,16 @@ ob_start();
                         </div>
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label for="Periode_Tahun" class="form-label">Tahun <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="Periode_Tahun" name="Periode_Tahun" 
-                                       value="<?= $slipGaji['Periode_Tahun'] ?>" min="2000" max="2100" required>
+                                <label for="Tahun" class="form-label">Tahun <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="Tahun" name="Tahun" 
+                                       value="<?= $slipGaji['Tahun'] ?>" min="2000" max="2100" required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label for="Tgl_Dibuat" class="form-label">Tanggal Dibuat <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="Tgl_Dibuat" name="Tgl_Dibuat" 
-                                       value="<?= date('Y-m-d', strtotime($slipGaji['Tgl_Dibuat'])) ?>" required>
+                                <label for="Tanggal_Dibuat" class="form-label">Tanggal Dibuat <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="Tanggal_Dibuat" name="Tanggal_Dibuat" 
+                                       value="<?= !empty($slipGaji['Tanggal_Dibuat']) ? date('Y-m-d', strtotime($slipGaji['Tanggal_Dibuat'])) : '' ?>" required>
                             </div>
                         </div>
                     </div>
@@ -59,16 +59,45 @@ ob_start();
                                value="<?= $slipGaji['Gaji_Pokok'] ?>" min="0" required>
                     </div>
                     
-                    <div class="mb-3">
-                        <label for="Tunjangan_Jabatan" class="form-label">Tunjangan Jabatan</label>
-                        <input type="number" class="form-control" id="Tunjangan_Jabatan" name="Tunjangan_Jabatan" 
-                               value="<?= $slipGaji['Tunjangan_Jabatan'] ?>" min="0">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="Tunjangan_Transportasi" class="form-label">Tunjangan Transportasi</label>
+                                <input type="number" class="form-control" id="Tunjangan_Transportasi" name="Tunjangan_Transportasi" 
+                                       value="<?= $slipGaji['Tunjangan_Transportasi'] ?>" min="0">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="Tunjangan_Kesehatan" class="form-label">Tunjangan Kesehatan</label>
+                                <input type="number" class="form-control" id="Tunjangan_Kesehatan" name="Tunjangan_Kesehatan" 
+                                       value="<?= $slipGaji['Tunjangan_Kesehatan'] ?>" min="0">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="Tunjangan_Lainnya" class="form-label">Tunjangan Lainnya</label>
+                                <input type="number" class="form-control" id="Tunjangan_Lainnya" name="Tunjangan_Lainnya" 
+                                       value="<?= $slipGaji['Tunjangan_Lainnya'] ?>" min="0">
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="mb-3">
-                        <label for="Potongan_BPJS" class="form-label">Potongan BPJS</label>
-                        <input type="number" class="form-control" id="Potongan_BPJS" name="Potongan_BPJS" 
-                               value="<?= $slipGaji['Potongan_BPJS'] ?>" min="0">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="Potongan_Tetap" class="form-label">Potongan Tetap</label>
+                                <input type="number" class="form-control" id="Potongan_Tetap" name="Potongan_Tetap" 
+                                       value="<?= $slipGaji['Potongan_Tetap'] ?>" min="0">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="Potongan_Lainnya" class="form-label">Potongan Lainnya</label>
+                                <input type="number" class="form-control" id="Potongan_Lainnya" name="Potongan_Lainnya" 
+                                       value="<?= $slipGaji['Potongan_Lainnya'] ?>" min="0">
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="d-flex justify-content-between">

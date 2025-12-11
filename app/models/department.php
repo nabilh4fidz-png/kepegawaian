@@ -20,9 +20,9 @@ class Department extends Model {
     public function updateJumlahKaryawan($id) {
         $db = Database::getInstance();
         $sql = "UPDATE departemen SET Jumlah_Karyawan = (
-                    SELECT COUNT(*) FROM karyawan WHERE ID_Departemen = :id
-                ) WHERE ID_Departemen = :id";
-        return $db->query($sql, ['id' => $id]);
+                    SELECT COUNT(*) FROM karyawan WHERE ID_Departemen = :id1
+                ) WHERE ID_Departemen = :id2";
+        return $db->query($sql, ['id1' => $id, 'id2' => $id]);
     }
 }
 

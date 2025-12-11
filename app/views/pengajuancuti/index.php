@@ -41,8 +41,8 @@ ob_start();
                                     <td><?= htmlspecialchars($p['Nama_Lengkap']) ?></td>
                                 <?php endif; ?>
                                 <td><?= htmlspecialchars($p['Nama_Cuti']) ?></td>
-                                <td><?= date('d/m/Y', strtotime($p['Tgl_Mulai'])) ?></td>
-                                <td><?= date('d/m/Y', strtotime($p['Tgl_Selesai'])) ?></td>
+                                <td><?= date('d/m/Y', strtotime($p['Tgl_Awal'] ?? '2000-01-01')) ?></td>
+                                <td><?= date('d/m/Y', strtotime($p['Tgl_Akhir'] ?? '2000-01-01')) ?></td>
                                 <td><?= htmlspecialchars($p['Jumlah_Hari']) ?> hari</td>
                                 <td>
                                     <?php

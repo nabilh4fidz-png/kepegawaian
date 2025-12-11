@@ -43,20 +43,28 @@ class PengajuanCutiController extends Controller {
                 ? $this->input('ID_Karyawan') 
                 : $user['karyawan_id'];
             
-            $tglMulai = new DateTime($this->input('Tgl_Mulai'));
-            $tglSelesai = new DateTime($this->input('Tgl_Selesai'));
-            $jumlahHari = $tglMulai->diff($tglSelesai)->days + 1;
+            $tglAwal = $this->input('Tgl_Mulai');
+            $tglAkhir = $this->input('Tgl_Selesai');
+            
+            // Validate dates are not empty
+            if (!$tglAwal || !$tglAkhir) {
+                $this->redirect('/Kepegawaian/pengajuancuti/create');
+                return;
+            }
+            
+            $tglAwalDateTime = new DateTime($tglAwal);
+            $tglAkhirDateTime = new DateTime($tglAkhir);
+            $jumlahHari = $tglAwalDateTime->diff($tglAkhirDateTime)->days + 1;
             
             $data = [
                 'ID_Karyawan' => $karyawanId,
                 'ID_Master_Cuti' => $this->input('ID_Master_Cuti'),
-                'Tgl_Pengajuan' => date('Y-m-d'),
-                'Tgl_Mulai' => $this->input('Tgl_Mulai'),
-                'Tgl_Selesai' => $this->input('Tgl_Selesai'),
+                'Tgl_Awal' => $tglAwal,
+                'Tgl_Akhir' => $tglAkhir,
                 'Jumlah_Hari' => $jumlahHari,
                 'Status_Pengajuan' => $user['role'] === 'HRD' ? 'Disetujui' : 'Pending',
-                'Tgl_Persetujuan' => $user['role'] === 'HRD' ? date('Y-m-d') : null,
-                'Keterangan' => $this->input('Keterangan')
+                'Tgl_Persetujuan' => $user['role'] === 'HRD' ? date('Y-m-d H:i:s') : null,
+                'Alasan' => $this->input('Keterangan')
             ];
             
             $pengajuanCutiModel = new PengajuanCuti();
@@ -100,16 +108,25 @@ class PengajuanCutiController extends Controller {
         }
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $tglMulai = new DateTime($this->input('Tgl_Mulai'));
-            $tglSelesai = new DateTime($this->input('Tgl_Selesai'));
-            $jumlahHari = $tglMulai->diff($tglSelesai)->days + 1;
+            $tglAwal = $this->input('Tgl_Mulai');
+            $tglAkhir = $this->input('Tgl_Selesai');
+            
+            // Validate dates are not empty
+            if (!$tglAwal || !$tglAkhir) {
+                $this->redirect('/Kepegawaian/pengajuancuti/edit/' . $id);
+                return;
+            }
+            
+            $tglAwalDateTime = new DateTime($tglAwal);
+            $tglAkhirDateTime = new DateTime($tglAkhir);
+            $jumlahHari = $tglAwalDateTime->diff($tglAkhirDateTime)->days + 1;
             
             $data = [
                 'ID_Master_Cuti' => $this->input('ID_Master_Cuti'),
-                'Tgl_Mulai' => $this->input('Tgl_Mulai'),
-                'Tgl_Selesai' => $this->input('Tgl_Selesai'),
+                'Tgl_Awal' => $tglAwal,
+                'Tgl_Akhir' => $tglAkhir,
                 'Jumlah_Hari' => $jumlahHari,
-                'Keterangan' => $this->input('Keterangan')
+                'Alasan' => $this->input('Keterangan')
             ];
             
             // HRD bisa edit semua
@@ -117,7 +134,7 @@ class PengajuanCutiController extends Controller {
                 $data['ID_Karyawan'] = $this->input('ID_Karyawan');
                 $data['Status_Pengajuan'] = $this->input('Status_Pengajuan', 'Pending');
                 if ($data['Status_Pengajuan'] !== 'Pending') {
-                    $data['Tgl_Persetujuan'] = date('Y-m-d');
+                    $data['Tgl_Persetujuan'] = date('Y-m-d H:i:s');
                 }
             }
             
@@ -143,41 +160,39 @@ class PengajuanCutiController extends Controller {
     public function approve($id) {
         Auth::requireRole(['HRD', 'Supervisor']);
         
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $pengajuanCutiModel = new PengajuanCuti();
-            $pengajuan = $pengajuanCutiModel->find($id);
+        $pengajuanCutiModel = new PengajuanCuti();
+        $pengajuan = $pengajuanCutiModel->find($id);
+        
+        if ($pengajuan) {
+            $data = [
+                'Status_Pengajuan' => 'Disetujui',
+                'Tgl_Persetujuan' => date('Y-m-d H:i:s'),
+                'Approved_By' => Auth::user()['karyawan_id']
+            ];
             
-            if ($pengajuan) {
-                $data = [
-                    'Status_Pengajuan' => 'Disetujui',
-                    'Tgl_Persetujuan' => date('Y-m-d')
-                ];
-                
-                $pengajuanCutiModel->update($id, $data);
-            }
-            
-            $this->redirect('/Kepegawaian/pengajuancuti');
+            $pengajuanCutiModel->update($id, $data);
         }
+        
+        $this->redirect('/Kepegawaian/pengajuancuti');
     }
     
     public function reject($id) {
         Auth::requireRole(['HRD', 'Supervisor']);
         
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $pengajuanCutiModel = new PengajuanCuti();
-            $pengajuan = $pengajuanCutiModel->find($id);
+        $pengajuanCutiModel = new PengajuanCuti();
+        $pengajuan = $pengajuanCutiModel->find($id);
+        
+        if ($pengajuan) {
+            $data = [
+                'Status_Pengajuan' => 'Ditolak',
+                'Tgl_Persetujuan' => date('Y-m-d H:i:s'),
+                'Approved_By' => Auth::user()['karyawan_id']
+            ];
             
-            if ($pengajuan) {
-                $data = [
-                    'Status_Pengajuan' => 'Ditolak',
-                    'Tgl_Persetujuan' => date('Y-m-d')
-                ];
-                
-                $pengajuanCutiModel->update($id, $data);
-            }
-            
-            $this->redirect('/Kepegawaian/pengajuancuti');
+            $pengajuanCutiModel->update($id, $data);
         }
+        
+        $this->redirect('/Kepegawaian/pengajuancuti');
     }
     
     public function delete($id) {

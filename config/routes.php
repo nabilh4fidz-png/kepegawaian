@@ -34,6 +34,8 @@ return [
         '/pengajuancuti/create' => ['PengajuanCutiController', 'create'],
         '/pengajuancuti/edit/{id}' => ['PengajuanCutiController', 'edit'],
         '/pengajuancuti/delete/{id}' => ['PengajuanCutiController', 'delete'],
+        '/pengajuancuti/approve/{id}' => ['PengajuanCutiController', 'approve'],
+        '/pengajuancuti/reject/{id}' => ['PengajuanCutiController', 'reject'],
         
         // Slip Gaji routes
         '/slipgaji' => ['SlipGajiController', 'index'],
@@ -65,8 +67,6 @@ return [
         '/pengajuancuti/create' => ['PengajuanCutiController', 'create'],
         '/pengajuancuti/edit/{id}' => ['PengajuanCutiController', 'edit'],
         '/pengajuancuti/delete/{id}' => ['PengajuanCutiController', 'delete'],
-        '/pengajuancuti/approve/{id}' => ['PengajuanCutiController', 'approve'],
-        '/pengajuancuti/reject/{id}' => ['PengajuanCutiController', 'reject'],
         
         // Slip Gaji routes
         '/slipgaji/create' => ['SlipGajiController', 'create'],

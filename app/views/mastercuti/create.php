@@ -22,23 +22,21 @@ ob_start();
                     </div>
                     
                     <div class="mb-3">
-                        <label for="Jatah_Hari" class="form-label">Jatah Hari <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" id="Jatah_Hari" name="Jatah_Hari" min="0" required>
+                        <label for="Jumlah_Hari" class="form-label">Jumlah Hari <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" id="Jumlah_Hari" name="Jumlah_Hari" min="0" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="Berlaku_Untuk" class="form-label">Berlaku Untuk</label>
-                        <input type="text" class="form-control" id="Berlaku_Untuk" name="Berlaku_Untuk">
+                        <label for="Keterangan" class="form-label">Keterangan</label>
+                        <textarea class="form-control" id="Keterangan" name="Keterangan" rows="3"></textarea>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="Tgl_Libur" class="form-label">Tanggal Libur</label>
-                        <input type="date" class="form-control" id="Tgl_Libur" name="Tgl_Libur">
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="Deskripsi" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" id="Deskripsi" name="Deskripsi" rows="3"></textarea>
+                        <label for="Status" class="form-label">Status</label>
+                        <select class="form-control" id="Status" name="Status">
+                            <option value="Aktif">Aktif</option>
+                            <option value="Non-Aktif">Non-Aktif</option>
+                        </select>
                     </div>
                     
                     <div class="d-flex justify-content-between">

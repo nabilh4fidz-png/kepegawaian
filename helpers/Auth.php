@@ -17,7 +17,7 @@ class Auth {
         $sql = "SELECT u.*, k.Nama_Lengkap, k.Email_Kantor, k.ID_Departemen 
                 FROM user u 
                 LEFT JOIN karyawan k ON u.ID_Karyawan = k.ID_Karyawan 
-                WHERE u.Username = :username AND u.Status = 'Aktif'";
+                WHERE u.Username = :username AND u.Status_Login = 'Aktif'";
         
         $stmt = $db->query($sql, ['username' => $username]);
         $user = $stmt->fetch();

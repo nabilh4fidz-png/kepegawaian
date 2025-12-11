@@ -34,8 +34,8 @@ class DepartmentController extends Controller {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'Jabatan' => $this->input('Jabatan'),
-                'Jumlah_Karyawan' => 0,
-                'Tgl_Berdiri' => $this->input('Tgl_Berdiri') ?: null
+                'Keterangan' => $this->input('Keterangan'),
+                'Jumlah_Karyawan' => 0
             ];
             
             $departmentModel = new Department();
@@ -60,7 +60,7 @@ class DepartmentController extends Controller {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'Jabatan' => $this->input('Jabatan'),
-                'Tgl_Berdiri' => $this->input('Tgl_Berdiri') ?: null
+                'Keterangan' => $this->input('Keterangan')
             ];
             
             $departmentModel->update($id, $data);

@@ -8,7 +8,7 @@ $config = [
     'host' => 'localhost',
     'username' => 'root',
     'password' => '',
-    'dbname' => 'kepegawaian_db'
+    'dbname' => 'kepegawaian_baru'
 ];
 
 echo "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Instalasi Database</title>";

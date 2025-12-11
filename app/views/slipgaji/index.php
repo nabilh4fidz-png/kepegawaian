@@ -22,7 +22,7 @@ ob_start();
                         <?php endif; ?>
                         <th>Periode</th>
                         <th>Gaji Pokok</th>
-                        <th>Take Home Pay</th>
+                        <th>Gaji Bersih</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -38,9 +38,9 @@ ob_start();
                                 <?php if ($user['role'] === 'HRD'): ?>
                                     <td><?= htmlspecialchars($sg['Nama_Lengkap']) ?></td>
                                 <?php endif; ?>
-                                <td><?= date('F Y', mktime(0, 0, 0, $sg['Periode_Bulan'], 1, $sg['Periode_Tahun'])) ?></td>
+                                <td><?= date('F Y', mktime(0, 0, 0, $sg['Bulan'], 1, $sg['Tahun'])) ?></td>
                                 <td>Rp <?= number_format($sg['Gaji_Pokok'], 0, ',', '.') ?></td>
-                                <td>Rp <?= number_format($sg['Take_Home_Pay'], 0, ',', '.') ?></td>
+                                <td>Rp <?= number_format($sg['Gaji_Bersih'], 0, ',', '.') ?></td>
                                 <td>
                                     <a href="/Kepegawaian/slipgaji/show/<?= $sg['ID_Slip'] ?>" class="btn btn-sm btn-info">Lihat</a>
                                     <?php if ($user['role'] === 'HRD'): ?>

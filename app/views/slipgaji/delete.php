@@ -22,7 +22,7 @@ ob_start();
                     </tr>
                     <tr>
                         <th>Periode</th>
-                        <td><?= date('F Y', mktime(0, 0, 0, $slipGaji['Periode_Bulan'], 1, $slipGaji['Periode_Tahun'])) ?></td>
+                        <td><?= date('F Y', mktime(0, 0, 0, $slipGaji['Bulan'], 1, $slipGaji['Tahun'])) ?></td>
                     </tr>
                 </table>
                 

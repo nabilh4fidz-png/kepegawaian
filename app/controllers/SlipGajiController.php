@@ -33,12 +33,15 @@ class SlipGajiController extends Controller {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'ID_Karyawan' => $this->input('ID_Karyawan'),
-                'Periode_Bulan' => $this->input('Periode_Bulan'),
-                'Periode_Tahun' => $this->input('Periode_Tahun'),
+                'Bulan' => $this->input('Bulan'),
+                'Tahun' => $this->input('Tahun'),
+                'Tanggal_Dibuat' => $this->input('Tanggal_Dibuat'),
                 'Gaji_Pokok' => $this->input('Gaji_Pokok', 0),
-                'Tunjangan_Jabatan' => $this->input('Tunjangan_Jabatan', 0),
-                'Potongan_BPJS' => $this->input('Potongan_BPJS', 0),
-                'Tgl_Dibuat' => $this->input('Tgl_Dibuat') ?: date('Y-m-d')
+                'Tunjangan_Transportasi' => $this->input('Tunjangan_Transportasi', 0),
+                'Tunjangan_Kesehatan' => $this->input('Tunjangan_Kesehatan', 0),
+                'Tunjangan_Lainnya' => $this->input('Tunjangan_Lainnya', 0),
+                'Potongan_Tetap' => $this->input('Potongan_Tetap', 0),
+                'Potongan_Lainnya' => $this->input('Potongan_Lainnya', 0)
             ];
             
             $slipGajiModel = new SlipGaji();
@@ -73,12 +76,15 @@ class SlipGajiController extends Controller {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'ID_Karyawan' => $this->input('ID_Karyawan'),
-                'Periode_Bulan' => $this->input('Periode_Bulan'),
-                'Periode_Tahun' => $this->input('Periode_Tahun'),
+                'Bulan' => $this->input('Bulan'),
+                'Tahun' => $this->input('Tahun'),
+                'Tanggal_Dibuat' => $this->input('Tanggal_Dibuat'),
                 'Gaji_Pokok' => $this->input('Gaji_Pokok', 0),
-                'Tunjangan_Jabatan' => $this->input('Tunjangan_Jabatan', 0),
-                'Potongan_BPJS' => $this->input('Potongan_BPJS', 0),
-                'Tgl_Dibuat' => $this->input('Tgl_Dibuat')
+                'Tunjangan_Transportasi' => $this->input('Tunjangan_Transportasi', 0),
+                'Tunjangan_Kesehatan' => $this->input('Tunjangan_Kesehatan', 0),
+                'Tunjangan_Lainnya' => $this->input('Tunjangan_Lainnya', 0),
+                'Potongan_Tetap' => $this->input('Potongan_Tetap', 0),
+                'Potongan_Lainnya' => $this->input('Potongan_Lainnya', 0)
             ];
             
             $totals = $slipGajiModel->calculateTotal($data);

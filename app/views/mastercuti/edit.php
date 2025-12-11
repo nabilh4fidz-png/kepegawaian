@@ -24,26 +24,22 @@ ob_start();
                     </div>
                     
                     <div class="mb-3">
-                        <label for="Jatah_Hari" class="form-label">Jatah Hari <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" id="Jatah_Hari" name="Jatah_Hari" 
-                               value="<?= htmlspecialchars($masterCuti['Jatah_Hari']) ?>" min="0" required>
+                        <label for="Jumlah_Hari" class="form-label">Jumlah Hari <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" id="Jumlah_Hari" name="Jumlah_Hari" 
+                               value="<?= htmlspecialchars($masterCuti['Jumlah_Hari'] ?? '') ?>" min="0" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="Berlaku_Untuk" class="form-label">Berlaku Untuk</label>
-                        <input type="text" class="form-control" id="Berlaku_Untuk" name="Berlaku_Untuk" 
-                               value="<?= htmlspecialchars($masterCuti['Berlaku_Untuk'] ?? '') ?>">
+                        <label for="Keterangan" class="form-label">Keterangan</label>
+                        <textarea class="form-control" id="Keterangan" name="Keterangan" rows="3"><?= htmlspecialchars($masterCuti['Keterangan'] ?? '') ?></textarea>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="Tgl_Libur" class="form-label">Tanggal Libur</label>
-                        <input type="date" class="form-control" id="Tgl_Libur" name="Tgl_Libur" 
-                               value="<?= $masterCuti['Tgl_Libur'] ? date('Y-m-d', strtotime($masterCuti['Tgl_Libur'])) : '' ?>">
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="Deskripsi" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" id="Deskripsi" name="Deskripsi" rows="3"><?= htmlspecialchars($masterCuti['Deskripsi'] ?? '') ?></textarea>
+                        <label for="Status" class="form-label">Status</label>
+                        <select class="form-control" id="Status" name="Status">
+                            <option value="Aktif" <?= ($masterCuti['Status'] ?? 'Aktif') === 'Aktif' ? 'selected' : '' ?>>Aktif</option>
+                            <option value="Non-Aktif" <?= ($masterCuti['Status'] ?? '') === 'Non-Aktif' ? 'selected' : '' ?>>Non-Aktif</option>
+                        </select>
                     </div>
                     
                     <div class="d-flex justify-content-between">

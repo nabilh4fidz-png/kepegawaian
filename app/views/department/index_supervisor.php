@@ -16,7 +16,7 @@ ob_start();
                         <th>ID</th>
                         <th>Jabatan</th>
                         <th>Jumlah Karyawan</th>
-                        <th>Tanggal Berdiri</th>
+                        <th>Keterangan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,7 +30,7 @@ ob_start();
                                 <td><?= htmlspecialchars($dept['ID_Departemen']) ?></td>
                                 <td><?= htmlspecialchars($dept['Jabatan']) ?></td>
                                 <td><?= htmlspecialchars($dept['Jumlah_Karyawan']) ?></td>
-                                <td><?= $dept['Tgl_Berdiri'] ? date('d/m/Y', strtotime($dept['Tgl_Berdiri'])) : '-' ?></td>
+                                <td><?= htmlspecialchars($dept['Keterangan'] ?? '-') ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>

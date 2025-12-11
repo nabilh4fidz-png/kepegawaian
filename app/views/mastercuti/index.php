@@ -17,8 +17,8 @@ ob_start();
                         <th>ID</th>
                         <th>Nama Cuti</th>
                         <th>Tipe Cuti</th>
-                        <th>Jatah Hari</th>
-                        <th>Berlaku Untuk</th>
+                        <th>Jumlah Hari</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -33,8 +33,12 @@ ob_start();
                                 <td><?= htmlspecialchars($mc['ID_Master_Cuti']) ?></td>
                                 <td><?= htmlspecialchars($mc['Nama_Cuti']) ?></td>
                                 <td><?= htmlspecialchars($mc['Tipe_Cuti']) ?></td>
-                                <td><?= htmlspecialchars($mc['Jatah_Hari']) ?> hari</td>
-                                <td><?= htmlspecialchars($mc['Berlaku_Untuk'] ?? '-') ?></td>
+                                <td><?= htmlspecialchars($mc['Jumlah_Hari'] ?? '-') ?> hari</td>
+                                <td>
+                                    <span class="badge <?= ($mc['Status'] ?? 'Aktif') === 'Aktif' ? 'bg-success' : 'bg-danger' ?>">
+                                        <?= htmlspecialchars($mc['Status'] ?? 'Aktif') ?>
+                                    </span>
+                                </td>
                                 <td>
                                     <a href="/Kepegawaian/mastercuti/edit/<?= $mc['ID_Master_Cuti'] ?>" class="btn btn-sm btn-warning">Edit</a>
                                     <a href="/Kepegawaian/mastercuti/delete/<?= $mc['ID_Master_Cuti'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>

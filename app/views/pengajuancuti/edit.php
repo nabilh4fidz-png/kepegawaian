@@ -53,14 +53,14 @@ ob_start();
                             <div class="mb-3">
                                 <label for="Tgl_Mulai" class="form-label">Tanggal Mulai <span class="text-danger">*</span></label>
                                 <input type="date" class="form-control" id="Tgl_Mulai" name="Tgl_Mulai" 
-                                       value="<?= date('Y-m-d', strtotime($pengajuan['Tgl_Mulai'])) ?>" required>
+                                       value="<?= !empty($pengajuan['Tgl_Awal']) ? date('Y-m-d', strtotime($pengajuan['Tgl_Awal'])) : '' ?>" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="Tgl_Selesai" class="form-label">Tanggal Selesai <span class="text-danger">*</span></label>
                                 <input type="date" class="form-control" id="Tgl_Selesai" name="Tgl_Selesai" 
-                                       value="<?= date('Y-m-d', strtotime($pengajuan['Tgl_Selesai'])) ?>" required>
+                                       value="<?= !empty($pengajuan['Tgl_Akhir']) ? date('Y-m-d', strtotime($pengajuan['Tgl_Akhir'])) : '' ?>" required>
                             </div>
                         </div>
                     </div>
