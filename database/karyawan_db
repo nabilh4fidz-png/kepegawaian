@@ -1,0 +1,487 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Dec 16, 2025 at 04:18 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `kepegawaian_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `departemen`
+--
+
+CREATE TABLE `departemen` (
+  `ID_Departemen` int(11) NOT NULL,
+  `Jabatan` varchar(100) NOT NULL,
+  `Keterangan` text DEFAULT NULL,
+  `Jumlah_Karyawan` int(11) DEFAULT 0,
+  `Tanggal_Dibuat` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Tanggal_Diupdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `departemen`
+--
+
+INSERT INTO `departemen` (`ID_Departemen`, `Jabatan`, `Keterangan`, `Jumlah_Karyawan`, `Tanggal_Dibuat`, `Tanggal_Diupdate`) VALUES
+(1, 'Backend Developer', 'Tim pengembangan backend aplikasi kaaryawb', 3, '2025-12-05 13:19:55', '2025-12-16 02:32:49'),
+(2, 'Frontend Developer', 'Tim pengembangan frontend dan UI/UX', 3, '2025-12-05 13:19:55', '2025-12-16 03:00:11'),
+(3, 'Database Administrator', 'Tim pengelolaan database dan server', 2, '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(4, 'Project Manager', 'Tim manajemen proyek', 2, '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(5, 'Quality Assurance', 'Tim testing dan quality control', 2, '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(6, 'Human Resources', 'Tim sumber daya manusia', 3, '2025-12-05 13:19:55', '2025-12-16 03:03:50'),
+(8, 'security', NULL, 0, '2025-12-08 12:26:51', '2025-12-15 16:46:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `karyawan`
+--
+
+CREATE TABLE `karyawan` (
+  `ID_Karyawan` int(11) NOT NULL,
+  `ID_Departemen` int(11) NOT NULL,
+  `Nama_Lengkap` varchar(150) NOT NULL,
+  `Jabatan` varchar(100) DEFAULT NULL,
+  `Tgl_Lahir` date NOT NULL,
+  `Tgl_Masuk` date NOT NULL,
+  `Email_Kantor` varchar(100) NOT NULL,
+  `Alamat` text NOT NULL,
+  `Status_Kerja` enum('Aktif','Cuti','Non-Aktif') DEFAULT 'Aktif',
+  `Tanggal_Dibuat` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Tanggal_Diupdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `karyawan`
+--
+
+INSERT INTO `karyawan` (`ID_Karyawan`, `ID_Departemen`, `Nama_Lengkap`, `Jabatan`, `Tgl_Lahir`, `Tgl_Masuk`, `Email_Kantor`, `Alamat`, `Status_Kerja`, `Tanggal_Dibuat`, `Tanggal_Diupdate`) VALUES
+(1, 1, 'Budi Santoso', NULL, '1990-05-15', '2020-01-10', 'budi.santoso@hrd.com', 'Jl. Merdeka No. 123, Jakarta', 'Aktif', '2025-12-05 13:19:55', '2025-12-15 10:13:09'),
+(2, 1, 'Rina Kusuma', NULL, '1992-08-22', '2021-03-15', 'rina.kusuma@supervisor.com', 'Jl. Sudirman No. 456, Jakarta', 'Aktif', '2025-12-05 13:19:55', '2025-12-15 10:13:09'),
+(3, 1, 'Agus Wijaya kusuma', NULL, '1989-12-03', '2019-06-20', 'agus.wijaya@karyawan.com', 'Jl. Ahmad Yani No. 789, Bandung jabar\r\n', 'Aktif', '2025-12-05 13:19:55', '2025-12-15 10:13:09'),
+(4, 2, 'Siti Nurhaliza', NULL, '1994-02-14', '2021-09-01', 'siti.nurhaliza@supervisor.com', 'Jl. Gatot Subroto No. 234, Jakarta', 'Aktif', '2025-12-05 13:19:55', '2025-12-15 10:13:09'),
+(5, 2, 'Hendra Gunawan', NULL, '1991-07-08', '2020-11-15', 'hendra.gunawan@karyawan.com', 'Jl. Diponegoro No. 567, Bekasi', 'Aktif', '2025-12-05 13:19:55', '2025-12-15 10:13:09'),
+(6, 2, 'Lisa Wijaya', NULL, '1995-04-19', '2022-02-01', 'lisa.wijaya@karyawan.com', 'Jl. Hayam Wuruk No. 890, Jakarta', 'Aktif', '2025-12-05 13:19:55', '2025-12-15 10:13:09'),
+(7, 3, 'Bambang Irawan', NULL, '1988-11-17', '2018-08-10', 'bambang.irawan@supervisor.com', 'Jl. Thamrin No. 112, Jakarta', 'Aktif', '2025-12-05 13:19:55', '2025-12-15 10:13:09'),
+(8, 3, 'Dewi Lestari', NULL, '1993-06-30', '2021-05-12', 'dewi.lestari@karyawan.com', 'Jl. Fatmawati No. 334, Jakarta', 'Aktif', '2025-12-05 13:19:55', '2025-12-15 10:13:09'),
+(9, 4, 'Cahyo Setiawan', NULL, '1987-09-12', '2019-01-15', 'cahyo.setiawan@supervisor.com', 'Jl. Menteng No. 556, Jakarta', 'Aktif', '2025-12-05 13:19:55', '2025-12-15 10:13:09'),
+(10, 4, 'Putri Handayani', NULL, '1993-10-05', '2022-03-20', 'putri.handayani@karyawan.com', 'Jl. Blok M No. 778, Jakarta', 'Non-Aktif', '2025-12-05 13:19:55', '2025-12-15 10:13:09'),
+(11, 5, 'Yudha Pratama', NULL, '1990-03-17', '2020-07-08', 'yudha.pratama@supervisor.com', 'Jl. Kebon Sirih No. 901, Jakarta', 'Aktif', '2025-12-05 13:19:55', '2025-12-16 02:31:23'),
+(13, 6, 'Siska Handoko', NULL, '1992-01-11', '2020-02-17', 'siska.handoko@hrd.com', 'Jl. Sahari No. 245, Jakarta', 'Aktif', '2025-12-05 13:19:55', '2025-12-15 10:13:09'),
+(20, 6, 'Ade Putri', NULL, '2006-08-09', '2025-12-12', 'ade@karyawan.com', 'SANIPAH NIPAH ppu', 'Aktif', '2025-12-15 10:19:25', '2025-12-16 02:46:58'),
+(23, 6, 'ani', NULL, '2025-07-09', '2025-12-16', 'ani@supervisor.com', 'smd', 'Aktif', '2025-12-16 03:03:50', '2025-12-16 03:03:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `libur_nasional`
+--
+
+CREATE TABLE `libur_nasional` (
+  `ID_Libur` int(11) NOT NULL,
+  `Nama_Libur` varchar(100) NOT NULL,
+  `Tanggal_Libur` date NOT NULL,
+  `Keterangan` text DEFAULT NULL,
+  `Tanggal_Dibuat` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `libur_nasional`
+--
+
+INSERT INTO `libur_nasional` (`ID_Libur`, `Nama_Libur`, `Tanggal_Libur`, `Keterangan`, `Tanggal_Dibuat`) VALUES
+(1, 'Tahun Baru', '2025-01-01', 'Hari Tahun Baru Masehi', '2025-12-05 13:19:55'),
+(2, 'Hari Kemerdekaan', '2025-08-17', 'Hari Kemerdekaan Indonesia', '2025-12-05 13:19:55'),
+(3, 'Hari Raya Idul Fitri', '2025-04-10', 'Hari Raya Idul Fitri', '2025-12-05 13:19:55'),
+(4, 'Hari Raya Idul Adha', '2025-06-07', 'Hari Raya Idul Adha', '2025-12-05 13:19:55'),
+(5, 'Tahun Baru Imlek', '2025-01-29', 'Tahun Baru Imlek', '2025-12-05 13:19:55'),
+(6, 'Hari Raya Nyepi', '2025-03-29', 'Hari Raya Nyepi', '2025-12-05 13:19:55'),
+(7, 'Hari Kenaikan Isa', '2025-05-29', 'Hari Kenaikan Isa Almasih', '2025-12-05 13:19:55'),
+(8, 'Natal', '2025-12-25', 'Hari Natal Kristus', '2025-12-05 13:19:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `master_cuti`
+--
+
+CREATE TABLE `master_cuti` (
+  `ID_Master_Cuti` int(11) NOT NULL,
+  `Nama_Cuti` varchar(100) NOT NULL,
+  `Tipe_Cuti` varchar(50) NOT NULL,
+  `Jumlah_Hari` int(11) NOT NULL,
+  `Keterangan` text DEFAULT NULL,
+  `Status` enum('Aktif','Non-Aktif') DEFAULT 'Aktif',
+  `Tanggal_Dibuat` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Tanggal_Diupdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `master_cuti`
+--
+
+INSERT INTO `master_cuti` (`ID_Master_Cuti`, `Nama_Cuti`, `Tipe_Cuti`, `Jumlah_Hari`, `Keterangan`, `Status`, `Tanggal_Dibuat`, `Tanggal_Diupdate`) VALUES
+(7, 'Cuti Tahunan', 'Cuti Reguler', 12, 'Cuti tahunan yang diberikan setiap tahun', 'Aktif', '2025-12-08 02:03:59', '2025-12-08 02:03:59'),
+(8, 'Cuti Sakit', 'Cuti Kesehatan', 7, 'Cuti untuk keperluan kesehatan dengan surat dokter', 'Aktif', '2025-12-08 02:03:59', '2025-12-16 02:51:20'),
+(9, 'Cuti Khusus', 'Cuti Keperluan', 3, 'Cuti untuk keperluan mendesak keluarga', 'Aktif', '2025-12-08 02:03:59', '2025-12-08 02:03:59'),
+(10, 'Cuti Haji', 'Cuti Keagamaan', 30, 'Cuti untuk menunaikan ibadah haji', 'Aktif', '2025-12-08 02:03:59', '2025-12-16 02:50:52'),
+(11, 'Cuti Liburan Bersama', 'Cuti Libur', 5, 'Cuti liburan bersama yang ditetapkan perusahaan', 'Aktif', '2025-12-08 02:03:59', '2025-12-08 02:03:59'),
+(12, 'Cuti Melahirkan', 'Cuti Khusus', 30, 'Cuti melahirkan untuk karyawan wanita', 'Aktif', '2025-12-08 02:03:59', '2025-12-16 02:51:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `master_gaji`
+--
+
+CREATE TABLE `master_gaji` (
+  `ID_Gaji_Config` int(11) NOT NULL,
+  `ID_Departemen` int(11) NOT NULL,
+  `Gaji_Pokok` decimal(15,2) NOT NULL,
+  `Tunjangan_Transportasi` decimal(15,2) DEFAULT 0.00,
+  `Tunjangan_Kesehatan` decimal(15,2) DEFAULT 0.00,
+  `Tunjangan_Lainnya` decimal(15,2) DEFAULT 0.00,
+  `Potongan_Tetap` decimal(15,2) DEFAULT 0.00,
+  `Keterangan` text DEFAULT NULL,
+  `Status` enum('Aktif','Non-Aktif') DEFAULT 'Aktif',
+  `Tanggal_Dibuat` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Tanggal_Diupdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `master_gaji`
+--
+
+INSERT INTO `master_gaji` (`ID_Gaji_Config`, `ID_Departemen`, `Gaji_Pokok`, `Tunjangan_Transportasi`, `Tunjangan_Kesehatan`, `Tunjangan_Lainnya`, `Potongan_Tetap`, `Keterangan`, `Status`, `Tanggal_Dibuat`, `Tanggal_Diupdate`) VALUES
+(1, 1, 6000000.00, 500000.00, 400000.00, 300000.00, 500000.00, 'Gaji Backend Developer', 'Aktif', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(2, 2, 5500000.00, 500000.00, 400000.00, 250000.00, 500000.00, 'Gaji Frontend Developer', 'Aktif', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(3, 3, 7000000.00, 500000.00, 400000.00, 400000.00, 600000.00, 'Gaji DBA', 'Aktif', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(4, 4, 8000000.00, 600000.00, 500000.00, 500000.00, 700000.00, 'Gaji Project Manager', 'Aktif', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(5, 5, 5000000.00, 400000.00, 350000.00, 200000.00, 400000.00, 'Gaji QA', 'Aktif', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(6, 6, 5500000.00, 400000.00, 350000.00, 250000.00, 450000.00, 'Gaji HR', 'Aktif', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(7, 1, 6000000.00, 500000.00, 400000.00, 300000.00, 500000.00, 'Gaji Backend Developer', 'Aktif', '2025-12-08 02:03:59', '2025-12-08 02:03:59'),
+(8, 2, 5500000.00, 500000.00, 400000.00, 250000.00, 500000.00, 'Gaji Frontend Developer', 'Aktif', '2025-12-08 02:03:59', '2025-12-08 02:03:59'),
+(9, 3, 7000000.00, 500000.00, 400000.00, 400000.00, 600000.00, 'Gaji DBA', 'Aktif', '2025-12-08 02:03:59', '2025-12-08 02:03:59'),
+(10, 4, 8000000.00, 600000.00, 500000.00, 500000.00, 700000.00, 'Gaji Project Manager', 'Aktif', '2025-12-08 02:03:59', '2025-12-08 02:03:59'),
+(11, 5, 5000000.00, 400000.00, 350000.00, 200000.00, 400000.00, 'Gaji QA', 'Aktif', '2025-12-08 02:03:59', '2025-12-08 02:03:59'),
+(12, 6, 5500000.00, 400000.00, 350000.00, 250000.00, 450000.00, 'Gaji HR', 'Aktif', '2025-12-08 02:03:59', '2025-12-08 02:03:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pengajuan_cuti`
+--
+
+CREATE TABLE `pengajuan_cuti` (
+  `ID_Cuti` int(11) NOT NULL,
+  `ID_Karyawan` int(11) NOT NULL,
+  `ID_Master_Cuti` int(11) NOT NULL,
+  `Tgl_Awal` date NOT NULL,
+  `Tgl_Akhir` date NOT NULL,
+  `Jumlah_Hari` int(11) NOT NULL,
+  `Alasan` text DEFAULT NULL,
+  `Status_Pengajuan` enum('Pending','Disetujui','Ditolak') DEFAULT 'Pending',
+  `Keterangan_Penolakan` text DEFAULT NULL,
+  `Tgl_Pengajuan` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Tgl_Persetujuan` datetime DEFAULT NULL,
+  `Approved_By` int(11) DEFAULT NULL,
+  `Tanggal_Diupdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `pengajuan_cuti`
+--
+
+INSERT INTO `pengajuan_cuti` (`ID_Cuti`, `ID_Karyawan`, `ID_Master_Cuti`, `Tgl_Awal`, `Tgl_Akhir`, `Jumlah_Hari`, `Alasan`, `Status_Pengajuan`, `Keterangan_Penolakan`, `Tgl_Pengajuan`, `Tgl_Persetujuan`, `Approved_By`, `Tanggal_Diupdate`) VALUES
+(1, 3, 7, '2025-01-20', '2025-01-24', 5, 'Liburan keluarga', 'Disetujui', NULL, '2025-12-05 13:19:55', '2025-01-18 10:30:00', 2, '2025-12-16 02:52:05'),
+(2, 5, 7, '2025-02-03', '2025-02-05', 3, 'Mengurus keperluan pribadi', 'Disetujui', NULL, '2025-12-05 13:19:55', '2025-01-31 14:15:00', 4, '2025-12-16 02:52:05'),
+(3, 6, 8, '2025-01-22', '2025-01-23', 2, 'Sakit demam dengan surat dokter', 'Disetujui', NULL, '2025-12-05 13:19:55', '2025-01-22 09:00:00', 4, '2025-12-16 02:52:05'),
+(4, 8, 9, '2025-02-10', '2025-02-12', 3, 'Keadaan keluarga mendesak', 'Disetujui', NULL, '2025-12-05 13:19:55', '2025-12-08 13:36:41', 7, '2025-12-16 02:52:05'),
+(5, 10, 7, '2025-02-17', '2025-02-21', 5, '', 'Ditolak', NULL, '2025-12-05 13:19:55', '2025-12-08 00:00:00', NULL, '2025-12-16 02:52:05'),
+(7, 3, 7, '2025-01-20', '2025-01-24', 5, 'Liburan keluarga', 'Disetujui', NULL, '2025-12-08 02:03:59', '2025-01-18 10:30:00', 2, '2025-12-16 02:52:05'),
+(8, 5, 7, '2025-02-03', '2025-02-05', 3, '', 'Disetujui', NULL, '2025-12-08 02:03:59', '2025-12-15 11:43:39', 4, '2025-12-16 02:52:05'),
+(9, 6, 8, '2025-01-22', '2025-01-23', 2, 'Sakit demam dengan surat dokter', 'Disetujui', NULL, '2025-12-08 02:03:59', '2025-01-22 09:00:00', 4, '2025-12-16 02:52:05'),
+(10, 8, 9, '2025-02-10', '2025-02-12', 3, '', 'Disetujui', NULL, '2025-12-08 02:03:59', '2025-12-08 00:00:00', NULL, '2025-12-16 02:52:05'),
+(17, 20, 10, '2025-12-16', '2026-01-07', 23, 'bolos', 'Disetujui', NULL, '2025-12-15 10:31:16', '2025-12-15 11:31:52', 4, '2025-12-15 10:31:52'),
+(24, 20, 9, '2025-12-16', '2025-12-21', 6, 'nd tau', 'Disetujui', NULL, '2025-12-16 03:08:44', '2025-12-16 04:09:03', 23, '2025-12-16 03:09:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `slip_gaji`
+--
+
+CREATE TABLE `slip_gaji` (
+  `ID_Slip` int(11) NOT NULL,
+  `ID_Karyawan` int(11) NOT NULL,
+  `Bulan` int(11) NOT NULL,
+  `Tahun` int(11) NOT NULL,
+  `Gaji_Pokok` decimal(15,2) NOT NULL,
+  `Tunjangan_Transportasi` decimal(15,2) DEFAULT 0.00,
+  `Tunjangan_Kesehatan` decimal(15,2) DEFAULT 0.00,
+  `Tunjangan_Lainnya` decimal(15,2) DEFAULT 0.00,
+  `Potongan_Tetap` decimal(15,2) DEFAULT 0.00,
+  `Potongan_Lainnya` decimal(15,2) DEFAULT 0.00,
+  `Total_Penerimaan` decimal(15,2) NOT NULL,
+  `Total_Potongan` decimal(15,2) NOT NULL,
+  `Gaji_Bersih` decimal(15,2) NOT NULL,
+  `Keterangan` text DEFAULT NULL,
+  `Tanggal_Dibuat` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Tanggal_Diupdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `slip_gaji`
+--
+
+INSERT INTO `slip_gaji` (`ID_Slip`, `ID_Karyawan`, `Bulan`, `Tahun`, `Gaji_Pokok`, `Tunjangan_Transportasi`, `Tunjangan_Kesehatan`, `Tunjangan_Lainnya`, `Potongan_Tetap`, `Potongan_Lainnya`, `Total_Penerimaan`, `Total_Potongan`, `Gaji_Bersih`, `Keterangan`, `Tanggal_Dibuat`, `Tanggal_Diupdate`) VALUES
+(1, 1, 1, 2025, 6000000.00, 500000.00, 400000.00, 300000.00, 500000.00, 100000.00, 7200000.00, 600000.00, 6600000.00, 'Slip gaji Januari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(2, 1, 2, 2025, 6000000.00, 500000.00, 400000.00, 300000.00, 500000.00, 100000.00, 7200000.00, 600000.00, 6600000.00, 'Slip gaji Februari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(3, 2, 1, 2025, 5500000.00, 500000.00, 400000.00, 250000.00, 500000.00, 0.00, 6650000.00, 500000.00, 6150000.00, 'Slip gaji Januari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(4, 2, 2, 2025, 5500000.00, 500000.00, 400000.00, 250000.00, 500000.00, 0.00, 6650000.00, 500000.00, 6150000.00, 'Slip gaji Februari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(5, 3, 1, 2025, 6000000.00, 500000.00, 400000.00, 300000.00, 500000.00, 100000.00, 7200000.00, 600000.00, 6600000.00, 'Slip gaji Januari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(6, 3, 2, 2025, 6000000.00, 500000.00, 400000.00, 300000.00, 500000.00, 100000.00, 7200000.00, 600000.00, 6600000.00, 'Slip gaji Februari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(7, 4, 1, 2025, 5500000.00, 500000.00, 400000.00, 250000.00, 500000.00, 0.00, 6650000.00, 500000.00, 6150000.00, 'Slip gaji Januari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(8, 4, 2, 2025, 5500000.00, 500000.00, 400000.00, 250000.00, 500000.00, 0.00, 6650000.00, 500000.00, 6150000.00, 'Slip gaji Februari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(9, 5, 1, 2025, 5500000.00, 500000.00, 400000.00, 250000.00, 500000.00, 0.00, 6650000.00, 500000.00, 6150000.00, 'Slip gaji Januari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(10, 5, 2, 2025, 5500000.00, 500000.00, 400000.00, 250000.00, 500000.00, 0.00, 6650000.00, 500000.00, 6150000.00, 'Slip gaji Februari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(11, 6, 1, 2025, 5500000.00, 500000.00, 400000.00, 250000.00, 500000.00, 12222.00, 6650000.00, 512222.00, 6137778.00, 'Slip gaji Januari 2025', '2025-12-04 16:00:00', '2025-12-08 12:24:21'),
+(12, 6, 2, 2025, 5500000.00, 500000.00, 400000.00, 250000.00, 500000.00, 0.00, 6650000.00, 500000.00, 6150000.00, 'Slip gaji Februari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(13, 7, 1, 2025, 7000000.00, 500000.00, 400000.00, 400000.00, 600000.00, 200000.00, 8300000.00, 800000.00, 7500000.00, 'Slip gaji Januari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(14, 7, 2, 2025, 7000000.00, 500000.00, 400000.00, 400000.00, 600000.00, 200000.00, 8300000.00, 800000.00, 7500000.00, 'Slip gaji Februari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(15, 8, 1, 2025, 7000000.00, 500000.00, 400000.00, 400000.00, 600000.00, 0.00, 8300000.00, 600000.00, 7700000.00, 'Slip gaji Januari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(16, 8, 2, 2025, 7000000.00, 500000.00, 400000.00, 400000.00, 600000.00, 0.00, 8300000.00, 600000.00, 7700000.00, 'Slip gaji Februari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(17, 9, 1, 2025, 8000000.00, 600000.00, 500000.00, 500000.00, 700000.00, 0.00, 9600000.00, 700000.00, 8900000.00, 'Slip gaji Januari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(18, 9, 2, 2025, 8000000.00, 600000.00, 500000.00, 500000.00, 700000.00, 0.00, 9600000.00, 700000.00, 8900000.00, 'Slip gaji Februari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(19, 10, 1, 2025, 8000000.00, 600000.00, 500000.00, 500000.00, 700000.00, 0.00, 9600000.00, 700000.00, 8900000.00, 'Slip gaji Januari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(20, 10, 2, 2025, 8000000.00, 600000.00, 500000.00, 500000.00, 700000.00, 0.00, 9600000.00, 700000.00, 8900000.00, 'Slip gaji Februari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(21, 11, 1, 2025, 5000000.00, 400000.00, 350000.00, 200000.00, 400000.00, 0.00, 5950000.00, 400000.00, 5550000.00, 'Slip gaji Januari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(22, 11, 2, 2025, 5000000.00, 400000.00, 350000.00, 200000.00, 400000.00, 0.00, 5950000.00, 400000.00, 5550000.00, 'Slip gaji Februari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(25, 13, 1, 2025, 5500000.00, 400000.00, 350000.00, 250000.00, 450000.00, 0.00, 6500000.00, 450000.00, 6050000.00, 'Slip gaji Januari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55'),
+(26, 13, 2, 2025, 5500000.00, 400000.00, 350000.00, 250000.00, 450000.00, 0.00, 6500000.00, 450000.00, 6050000.00, 'Slip gaji Februari 2025', '2025-12-05 13:19:55', '2025-12-05 13:19:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `ID_User` int(11) NOT NULL,
+  `ID_Karyawan` int(11) DEFAULT NULL,
+  `Username` varchar(50) NOT NULL,
+  `Password` varchar(255) NOT NULL,
+  `Role` enum('HRD','Supervisor','Karyawan') DEFAULT 'Karyawan',
+  `Status_Login` enum('Aktif','Non-Aktif') DEFAULT 'Aktif',
+  `Last_Login` datetime DEFAULT NULL,
+  `Tanggal_Dibuat` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Tanggal_Diupdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`ID_User`, `ID_Karyawan`, `Username`, `Password`, `Role`, `Status_Login`, `Last_Login`, `Tanggal_Dibuat`, `Tanggal_Diupdate`) VALUES
+(1, 1, 'budi_santoso@hrd.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'HRD', 'Aktif', NULL, '2025-12-05 13:19:55', '2025-12-15 10:13:36'),
+(2, 2, 'rina_kusuma@supervisor.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'Supervisor', 'Aktif', NULL, '2025-12-05 13:19:55', '2025-12-15 10:13:36'),
+(3, 3, 'agus_wijaya@karyawan.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'Karyawan', 'Aktif', NULL, '2025-12-05 13:19:55', '2025-12-15 10:13:36'),
+(4, 4, 'siti_nurhaliza@supervisor.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'Supervisor', 'Aktif', NULL, '2025-12-05 13:19:55', '2025-12-15 10:13:36'),
+(5, 5, 'hendra_gunawan@karyawan.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'Karyawan', 'Aktif', NULL, '2025-12-05 13:19:55', '2025-12-15 10:13:36'),
+(6, 6, 'lisa_wijaya@karyawan.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'Karyawan', 'Aktif', NULL, '2025-12-05 13:19:55', '2025-12-15 10:13:36'),
+(7, 7, 'bambang_irawan@supervisor.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'Supervisor', 'Aktif', NULL, '2025-12-05 13:19:55', '2025-12-15 10:13:36'),
+(8, 8, 'dewi_lestari@karyawan.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'Karyawan', 'Aktif', NULL, '2025-12-05 13:19:55', '2025-12-15 10:13:36'),
+(9, 9, 'cahyo_setiawan@supervisor.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'Supervisor', 'Aktif', NULL, '2025-12-05 13:19:55', '2025-12-15 10:13:36'),
+(10, 10, 'putri_handayani@karyawan.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'Karyawan', 'Aktif', NULL, '2025-12-05 13:19:55', '2025-12-15 10:13:36'),
+(11, 11, 'yudha_pratama@supervisor.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'Supervisor', 'Aktif', NULL, '2025-12-05 13:19:55', '2025-12-15 10:13:36'),
+(12, NULL, 'maya_kusuma@karyawan.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'Karyawan', 'Aktif', NULL, '2025-12-05 13:19:55', '2025-12-15 10:13:36'),
+(13, 13, 'siska_handoko@hrd.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'HRD', 'Aktif', NULL, '2025-12-05 13:19:55', '2025-12-15 10:13:36'),
+(15, 20, 'ade@karyawan.com', '$2y$10$pWgSDqiqyAlh6KqNFsHmMel4PtAANywr6hPs4d3mwAOVSpuKefaT6', 'Karyawan', 'Aktif', NULL, '2025-12-15 10:19:25', '2025-12-15 10:28:31'),
+(16, NULL, 'nabil@karyawan.com', '$2y$10$ozS7e4dFEYotfBUegQYbsuzufwREsD6hyHA337kxtQ0hw2KOL.0vW', 'Karyawan', 'Aktif', NULL, '2025-12-15 12:56:54', '2025-12-15 12:56:54'),
+(17, NULL, 'nafis@karyawan.com', '$2y$10$Lagb6/SNhIaZkHMkiUkYf.BMZz7PLphlrqcyWozM9MhNKthqMAx8i', 'Karyawan', 'Aktif', NULL, '2025-12-16 02:31:46', '2025-12-16 02:31:46'),
+(18, 23, 'ani@supervisor.com', '$2y$10$O8rV8Y5OihPoVyVSGv.ZFOtheTeZXbQG/a5rMWrrX1UvYyiXAjEF.', 'Supervisor', 'Aktif', NULL, '2025-12-16 03:03:50', '2025-12-16 03:03:50');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `departemen`
+--
+ALTER TABLE `departemen`
+  ADD PRIMARY KEY (`ID_Departemen`),
+  ADD UNIQUE KEY `Jabatan` (`Jabatan`);
+
+--
+-- Indexes for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  ADD PRIMARY KEY (`ID_Karyawan`),
+  ADD UNIQUE KEY `Email_Kantor` (`Email_Kantor`),
+  ADD KEY `idx_departemen` (`ID_Departemen`),
+  ADD KEY `idx_email` (`Email_Kantor`),
+  ADD KEY `idx_status` (`Status_Kerja`);
+
+--
+-- Indexes for table `libur_nasional`
+--
+ALTER TABLE `libur_nasional`
+  ADD PRIMARY KEY (`ID_Libur`),
+  ADD UNIQUE KEY `Tanggal_Libur` (`Tanggal_Libur`),
+  ADD KEY `idx_tanggal` (`Tanggal_Libur`);
+
+--
+-- Indexes for table `master_cuti`
+--
+ALTER TABLE `master_cuti`
+  ADD PRIMARY KEY (`ID_Master_Cuti`),
+  ADD KEY `idx_status` (`Status`);
+
+--
+-- Indexes for table `master_gaji`
+--
+ALTER TABLE `master_gaji`
+  ADD PRIMARY KEY (`ID_Gaji_Config`),
+  ADD KEY `idx_departemen` (`ID_Departemen`),
+  ADD KEY `idx_status` (`Status`);
+
+--
+-- Indexes for table `pengajuan_cuti`
+--
+ALTER TABLE `pengajuan_cuti`
+  ADD PRIMARY KEY (`ID_Cuti`),
+  ADD KEY `ID_Master_Cuti` (`ID_Master_Cuti`),
+  ADD KEY `Approved_By` (`Approved_By`),
+  ADD KEY `idx_karyawan` (`ID_Karyawan`),
+  ADD KEY `idx_status` (`Status_Pengajuan`),
+  ADD KEY `idx_tanggal` (`Tgl_Awal`,`Tgl_Akhir`);
+
+--
+-- Indexes for table `slip_gaji`
+--
+ALTER TABLE `slip_gaji`
+  ADD PRIMARY KEY (`ID_Slip`),
+  ADD UNIQUE KEY `unique_slip` (`ID_Karyawan`,`Bulan`,`Tahun`),
+  ADD KEY `idx_karyawan` (`ID_Karyawan`),
+  ADD KEY `idx_periode` (`Bulan`,`Tahun`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`ID_User`),
+  ADD UNIQUE KEY `Username` (`Username`),
+  ADD UNIQUE KEY `unique_karyawan_user` (`ID_Karyawan`),
+  ADD KEY `idx_username` (`Username`),
+  ADD KEY `idx_role` (`Role`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `departemen`
+--
+ALTER TABLE `departemen`
+  MODIFY `ID_Departemen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  MODIFY `ID_Karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `libur_nasional`
+--
+ALTER TABLE `libur_nasional`
+  MODIFY `ID_Libur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `master_cuti`
+--
+ALTER TABLE `master_cuti`
+  MODIFY `ID_Master_Cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `master_gaji`
+--
+ALTER TABLE `master_gaji`
+  MODIFY `ID_Gaji_Config` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `pengajuan_cuti`
+--
+ALTER TABLE `pengajuan_cuti`
+  MODIFY `ID_Cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `slip_gaji`
+--
+ALTER TABLE `slip_gaji`
+  MODIFY `ID_Slip` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `ID_User` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  ADD CONSTRAINT `karyawan_ibfk_1` FOREIGN KEY (`ID_Departemen`) REFERENCES `departemen` (`ID_Departemen`);
+
+--
+-- Constraints for table `master_gaji`
+--
+ALTER TABLE `master_gaji`
+  ADD CONSTRAINT `master_gaji_ibfk_1` FOREIGN KEY (`ID_Departemen`) REFERENCES `departemen` (`ID_Departemen`);
+
+--
+-- Constraints for table `pengajuan_cuti`
+--
+ALTER TABLE `pengajuan_cuti`
+  ADD CONSTRAINT `pengajuan_cuti_ibfk_1` FOREIGN KEY (`ID_Karyawan`) REFERENCES `karyawan` (`ID_Karyawan`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pengajuan_cuti_ibfk_2` FOREIGN KEY (`ID_Master_Cuti`) REFERENCES `master_cuti` (`ID_Master_Cuti`),
+  ADD CONSTRAINT `pengajuan_cuti_ibfk_3` FOREIGN KEY (`Approved_By`) REFERENCES `karyawan` (`ID_Karyawan`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `slip_gaji`
+--
+ALTER TABLE `slip_gaji`
+  ADD CONSTRAINT `slip_gaji_ibfk_1` FOREIGN KEY (`ID_Karyawan`) REFERENCES `karyawan` (`ID_Karyawan`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`ID_Karyawan`) REFERENCES `karyawan` (`ID_Karyawan`) ON DELETE SET NULL;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
