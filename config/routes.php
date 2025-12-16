@@ -45,6 +45,14 @@ return [
         '/slipgaji/edit/{id}' => ['SlipGajiController', 'edit'],
         '/slipgaji/delete/{id}' => ['SlipGajiController', 'delete'],
         '/slipgaji/show/{id}' => ['SlipGajiController', 'show'],
+
+        '/laporan/karyawan' => ['LaporanController', 'karyawan'],
+    '/laporan/cuti' => ['LaporanController', 'cuti'],
+    '/laporan/gaji' => ['LaporanController', 'gaji'],
+    '/laporan/export/karyawan-csv' => ['LaporanController', 'exportKaryawanCSV'],
+    '/laporan/export/cuti-csv' => ['LaporanController', 'exportCutiCSV'],
+    '/laporan/print/karyawan' => ['LaporanController', 'printKaryawan'],
+
     ],
     'POST' => [
         '/login' => ['AuthController', 'login'],
@@ -74,13 +82,8 @@ return [
         '/slipgaji/create' => ['SlipGajiController', 'create'],
         '/slipgaji/edit/{id}' => ['SlipGajiController', 'edit'],
         '/slipgaji/delete/{id}' => ['SlipGajiController', 'delete'],
-    '/laporan' => ['LaporanController', 'index'],
-    '/laporan/karyawan' => ['LaporanController', 'karyawan'],
-    '/laporan/cuti' => ['LaporanController', 'cuti'],
-    '/laporan/gaji' => ['LaporanController', 'gaji'],
-    '/laporan/export/karyawan-csv' => ['LaporanController', 'exportKaryawanCSV'],
-    '/laporan/export/cuti-csv' => ['LaporanController', 'exportCutiCSV'],
-    '/laporan/print/karyawan' => ['LaporanController', 'printKaryawan'],
+        '/laporan' => ['LaporanController', 'index'],
+    
 ]
 ];
 
