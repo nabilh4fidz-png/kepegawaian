@@ -14,6 +14,7 @@ ob_start();
                     <li><a href="/Kepegawaian/mastercuti">Halaman Master Cuti</a></li>
                     <li><a href="/Kepegawaian/pengajuancuti">Halaman Pengajuan Cuti</a></li>
                     <li><a href="/Kepegawaian/slipgaji">Halaman Slip Gaji</a></li>
+                    <li><a href="/Kepegawaian/laporan">📊 Halaman Laporan</a></li>
                 </ul>
             </div>
         </div>
@@ -89,4 +90,3 @@ ob_start();
 $content = ob_get_clean();
 require_once __DIR__ . '/../layouts/base.php';
 ?>
-
